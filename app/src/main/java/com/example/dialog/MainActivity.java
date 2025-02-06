@@ -13,20 +13,21 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
     Dialog d;
+    AlertDialog.Builder dialog2
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        AlertDialog.Builder dialog2 = new AlertDialog.Builder(this);
+        dialog2 = new AlertDialog.Builder(this);
         dialog2.setTitle("Welcome");
         dialog2.setCancelable(false);
         dialog2.setPositiveButton("yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                EditText text = findViewById(R.)
-                dialog2.di
+
             }
-        })
+        });
+
         d=new Dialog(this);
         d.setContentView(R.layout.dialog_custom);
         EditText name = d.findViewById(R.id.name);
@@ -44,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
                     if (username.equals("admin")&& password.equals("admin")) {
                         Toast.makeText(MainActivity.this, "Logged in successfully", Toast.LENGTH_SHORT).show();
                         d.dismiss();
+                        dialog2.create().show();
                     }
                     else
                         Toast.makeText(MainActivity.this, "wrong info", Toast.LENGTH_SHORT).show();
