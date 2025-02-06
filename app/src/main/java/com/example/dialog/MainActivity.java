@@ -7,28 +7,21 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
     Dialog d;
-    AlertDialog.Builder dialog2
+    AlertDialog dialog2;
+    TextView text;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        dialog2 = new AlertDialog.Builder(this);
-        dialog2.setTitle("Welcome");
-        dialog2.setCancelable(false);
-        dialog2.setPositiveButton("yes", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-
-            }
-        });
-
-        d=new Dialog(this);
+        text=findViewById(R.id.text);
+        d = new Dialog(this);
         d.setContentView(R.layout.dialog_custom);
         EditText name = d.findViewById(R.id.name);
         EditText pass = d.findViewById(R.id.pass);
@@ -42,13 +35,13 @@ public class MainActivity extends AppCompatActivity {
                 if (username.isEmpty() || password.isEmpty()) {
                     Toast.makeText(MainActivity.this, "Please fill in both fields", Toast.LENGTH_SHORT).show();
                 } else {
-                    if (username.equals("admin")&& password.equals("admin")) {
+                    if (username.equals("admin") && password.equals("admin")) {
                         Toast.makeText(MainActivity.this, "Logged in successfully", Toast.LENGTH_SHORT).show();
                         d.dismiss();
-                        dialog2.create().show();
-                    }
-                    else
+                        dialog2.show();
+                    } else {
                         Toast.makeText(MainActivity.this, "wrong info", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
@@ -61,6 +54,19 @@ public class MainActivity extends AppCompatActivity {
         });
 
         d.setCancelable(true);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Welcome");
+        builder.setCancelable(false);
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialog2.dismiss();
+                text.setText("ffff");
+            }
+        });
+
+        dialog2 = builder.create();
     }
 
     public void dialog(View view) {
